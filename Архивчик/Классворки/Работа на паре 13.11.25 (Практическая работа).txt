@@ -1,0 +1,62 @@
+if db_id ('Artworks_24_KIS_1_Kalyakin_Ilenko') is null
+CREATE database Artworks_24_KIS_1_Kalyakin_Ilenko;
+use Artworks_24_KIS_1_Kalyakin_Ilenko
+
+if object_id ('dbo.artworks', 'U') is not null
+drop table dbo.artworks;
+create table artworks(
+artworkid bigint identity(1,1) constraint PK_artworks primary key,
+title varchar(100),
+genre varchar(50),
+tools varchar(50),
+authorid bigint,
+creatdate date,
+price money,
+depid int not null)
+
+if object_id ('dbo.authors', 'U') is not null
+drop table dbo.authors;
+create table authors(
+authorid bigint identity(1,1) constraint PK_authors primary key,
+lastname varchar(25) not null,
+firstname varchar(25) not null,
+middlename varchar(25),
+dateofbirth date,
+dateofdeath date,
+country varchar(25))
+
+if object_id ('dbo.employees', 'U') is not null
+drop table dbo.employees;
+create table employees(
+empid bigint identity(1,1) constraint PK_employees primary key,
+lastname varchar(25) not null,
+firstname varchar(25) not null,
+middlename varchar(25)not null,
+position varchar(25),
+salary money,
+begindate date not null,
+enddate date,
+depid int)
+
+if object_id ('dbo.departments', 'U') is not null
+drop table dbo.departments;
+create table departments(
+depid int identity(1,1) constraint PK_departments primary key,
+name varchar(25)not null)
+
+alter table dbo.artworks
+add constraint fk_artw_auth
+foreign key (authorid)
+references authors (authorid)
+
+alter table dbo.artworks
+add constraint fk_artw_dep
+foreign key (depid)
+references departments (depid)
+
+alter table dbo.employees
+add constraint fk_emp_dep
+foreign key (depid)
+references departments (depid)
+
+

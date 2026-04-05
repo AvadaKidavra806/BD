@@ -1,0 +1,8 @@
+use Fitnes1
+--?7
+select K.firstname as Имя_клиента, K.Lastname as Фамилия_клиента, K.Paramonic as Отчество_клиента, tel as Телефон, AgeOfBirsday as Дата_рождения, Foto as Фото, Tittle as Пол, cel as Цель
+from Klient K join Sex 
+on K.IdSex=Sex.IdSex
+join Zayavka z
+on z.cel = 'похудеть' and k.IdKl=z.IdKl
+--?????? ???? ??? ?????????? ? ???????, ? ??.

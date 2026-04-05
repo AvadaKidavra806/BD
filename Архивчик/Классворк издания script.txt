@@ -1,0 +1,40 @@
+--Create database Ильенко_Калякин_издания
+use Ильенко_Калякин_издания
+create table Вид_издания
+(Ид_вид_издания int identity (1,1) primary key,
+Вид varchar (128) not null)
+
+create table Стоимость_издания
+(Ид_стоимость_издания int identity (1,1) primary key,
+Цена_за_1_месяц money not null)
+
+create table Издание
+(Ид_издания int identity (1,1) primary key,
+Индекс_издания decimal (20) not null,
+Ид_вид_издания int foreign key references Вид_издания (Ид_вид_издания)not null,
+Название_издания varchar (128) not null,
+Ид_стоимость_издания int foreign key references Стоимость_издания (Ид_стоимость_издания)not null )
+
+create table Срок 
+(Ид_срок int identity (1,1) primary key,
+Срок_подписки varchar (56) not null)
+
+create table Получатель
+(код_получателя int identity (1,1) primary key,
+Фамилия varchar (121) not null,
+Имя varchar (121) not null,
+Отчество varchar (121) null,
+Адрес_получателя varchar (123) not null)
+
+Create table Подписка 
+(Ид_подписки int identity (1,1) primary key,
+Ид_издания int foreign key references Издание (Ид_издания)not null,
+Код_получателя int foreign key references Получатель (Код_получателя)not null,
+Дата_начала_подписки date not null,
+Ид_срок int foreign key references Срок (Ид_срок)not null,
+Итоговая_стоимость_подписки money not null)
+
+alter table срок 
+drop column Срок_подписки_мес
+alter table Срок 
+add Срок_подписки_мес int not null 

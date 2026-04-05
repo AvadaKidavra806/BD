@@ -1,0 +1,52 @@
+﻿--Create database мебель
+use мебель
+
+create table Материал
+(ид_материал int identity (1,1) primary key,
+Материал varchar(64) not null,
+Процент_потерь_сырья decimal (2) not null)
+ 
+create table Тип_продукции
+(ид_тип_продукции int identity (1,1) primary key,
+тип varchar(64) not null,
+Коэффициент_типа_продукции float (23) not null) 
+
+create table Продукция
+(ид_продукции int identity (1,1) primary key ,
+Название_продукции varchar (64) not null,
+артикул varchar (10) not null)
+
+create table Характеристики_продукции
+(Ид_характеристики int identity (1,1) primary key,
+ид_продукции int foreign key references Продукция (ид_продукции),
+ид_тип_продукции int foreign key references Тип_продукции (ид_тип_прод),
+ид_материал int foreign key references Материал (ид_материал)) 
+
+create table тип_цех
+(ид_тип int identity (1,1) primary key,
+тип_цеха varchar (45) not null)
+
+create table  цех
+(Ид_цех int identity (1,1) primary key,
+название_цеха varchar (45) not null,
+ид_тип int foreign key references тип_цех (ид_тип)not null,
+Колво_человек_для_производства decimal (3) not null)
+
+create table прод_цех
+(Ид_прод_цех int identity (1,1) primary key,
+Ид_продукции int foreign key references Продукция (Ид_продукции) not null,
+Ид_цех int foreign key references цех (Ид_цех) not null,
+Время_изготовления time not null)
+
+create table партнер
+(ид_партнера int identity (1,1) primary key ,
+Партнер varchar (128) not null)
+
+create table стоимость_партнеру
+(Ид_стоимость_партнера int identity (1,1) primary key,
+Ид_партнера int foreign key references Партнер (Ид_партнера) not null,
+Ид_продукции int foreign key references Продукция (Ид_продукции) not null,
+Мин_стоимость_партнеру decimal (10) not null)
+
+
+

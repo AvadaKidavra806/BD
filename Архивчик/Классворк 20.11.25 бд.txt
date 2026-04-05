@@ -1,0 +1,47 @@
+create table Клиент(
+ИДклиента int identity(1,1) constraint PK_клиент primary key,
+Фамилия varchar(25) not null,
+Имя varchar(25) not null,
+Отчество varchar(25),
+Датарождения date not null)
+
+create table ПаспортКлиента
+(ИДПаспортклиентa int identity (1,1) primary key,
+ИДКлиента int foreign key references Клиент (ИДКлиента) not null ,
+Серия char (4 )not null,
+Номер char (6) not null,
+ДатаВыдачи date not null)
+
+create table Поездка
+(ИДПоездка int identity (1,1) primary key,
+НомерДоговора decimal (20) not null,
+ИДКлиента int foreign key references Клиент (ИДКлиента) not null,
+Ценапоездки money not null )
+
+create table Стоимостьпоездки
+(ИДСтоимостьпоездки int identity (1,1) primary key,
+ИДПоездки int foreign key references Поездка (ИДПоездка) not null,
+НалогПоездки decimal (10))
+
+create table СтранаНазначения 
+(ИДСтранаНазначения int identity (1,1) primary key,
+Название varchar (24) not null,
+СтоимостьВизы decimal (34) null)
+
+create table Маршрут
+(ИДМаршрут int  identity (1,1) primary key,
+ИДСтранаНазначения int foreign key references СтранаНазначения (ИДСтранаНазначения) not null,
+Ценазаодиндень money not null,
+СтоимостьТранспортныхуслуг money not null)
+
+create table ЦельПоездки(
+ИдЦельПоездки int identity(1,1)  primary key,
+НаименованиеЦели varchar(50) not null)
+
+create table МаршрутПоездки
+(ИДМаршрутПоездки int identity (1,1) primary key,
+ИДМаршрут int foreign key references Маршрут (ИДМаршрут) not null,
+ИдЦельПоездки int foreign key references ЦельПоездки (ИдЦельПоездки) not null,
+ИДПоездка int foreign key references Поездка (ИДПоездка) not null,
+ДатаНачалаПоездки date not null,
+КолвоДнейПоездки DEcimal (38) not null)

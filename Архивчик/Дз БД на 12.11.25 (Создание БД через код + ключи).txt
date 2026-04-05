@@ -1,0 +1,29 @@
+--Create database ��
+use  ��
+create table ������_��������� 
+   (���_�������� INT primary key /*identity*/,
+   ������� varchar (128), 
+   ��� varchar (128), 
+   ������� varchar (128), 
+   ����_�������� date, 
+   ��� varChar (1), 
+   ����� varchar,
+   ������� decimal (12))
+create table ������������� 
+   (���_������������� int  /*identity*/, 
+    ��������_������������� varchar (128))
+create table �������� 
+    (���_�������� int primary key /*identity*/,
+    ��������_�������� varchar (128))
+create table ������������� 
+     (���_������������� int primary key, 
+     ������� Varchar, 
+     ��� Varchar, 
+     �������� Varchar )
+create table ������ 
+    (��� int primary key,
+     ���_�������� int constraint �����_����� foreign key references ������_��������� (���_��������) ,
+     ���_�������� int foreign key references �������� (���_��������), 
+     ������ int, 
+     ���� date, 
+     ���_������������� int foreign key references ������������� (���_�������������) )
