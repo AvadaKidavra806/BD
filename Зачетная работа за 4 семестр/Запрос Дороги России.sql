@@ -6,7 +6,7 @@ create table Данные_работника
 Фамилия nvarchar (100) not null,
 Имя nvarchar (100) not null,
 Отчество nvarchar (100) null,
-Дата_рождения date null,
+Дата_рождения date not null,
 E_mail nvarchar (70) null,
 Доп_инфа nvarchar (100) null)
 
