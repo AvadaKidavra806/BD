@@ -62,13 +62,63 @@ create table Календарь_посещения
 create table Инфо_уваж_пропуск
 (Ид_уваж_пропуск int primary key,
 Ид_посещения int foreign key references Календарь_посещения (Ид_посещение) not null,
-Ид_тип_уваж_пропуска int foreign key references тип_уваж_пропуска (Ид_тип_уваж_пропуска) not null,
+Тип_уваж_пропуска int foreign key references тип_уваж_пропуска (Ид_тип_уваж_пропуска) not null,
 Дата_начала date not null,
 Дата_конца date not null,
 Данные_подменщика int foreign key references Данные_работника (Ид_данные_работника) not null)
 
 --основная база 
 
+create table Резюме
+(Ид_резюме int primary key,
+Данные_человека int foreign key references Данные_работника not null,
+Ссылка_на_резюме nvarchar (120) not null)
+
+create table Статусы
+(Ид_статус int primary key,
+Статус nvarchar (120) not null)
+
+create table Типы_материалов
+(Ид_тип_материала int primary key,
+Тип_материала nvarchar (120) not null)
+
+create table Область
+(Ид_область int primary key,
+Область nvarchar (120) not null)
+
+create table Материалы
+(Ид_материал int primary key,
+Наименование_материала nvarchar (120) not null,
+Статус int foreign key references Статусы not null,
+Тип_материала int foreign key references Типы_материалов not null,
+Область int foreign key references Область not null,
+Автор int foreign key references Данные_работника not null)
+
+create table Статусы_меропртятия
+(Ид_статус int primary key,
+Статус nvarchar (100) not null)
+
+create table Типы_мероприятий
+(Ид_тип_мероприятий int primary key,
+Тип_мероприятий nvarchar (120) not null)
+
+create table Мероприятия
+(Ид_мероприятия int primary key,
+Название_мероприятия nvarchar (120) not null,
+Тип_мероприятия int foreign key references Типы_мероприятий not null,
+Статуса int foreign key references Статусы_меропртятия not null,
+Дата_время_мероприятия datetime,
+Краткое_описание nvarchar (120))
+
+create table Материалы_мероприятия
+(Ид_материалы_мероприятия int primary key,
+Материал int foreign key references Материалы not null,
+Мероприятие int foreign key references Мероприятия not null)
+
+create table Ответственные_за_мероприятие
+(Ид_ответственные_за_мероприятие int primary key,
+Данные_ответственного int foreign key references Данные_работника not null,
+Мероприятие int foreign key references Мероприятия not null)
 
 /*
 create table WorkingCalendar
