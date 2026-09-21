@@ -30,19 +30,3 @@ create table Состав_заказа
 Ид_товара int foreign key references Товары (Ид_товара) not null,
 Количество_единиц_товара decimal (10, 3) not null,
 Стоимость_товара_с_учетом_скидки decimal (10, 2)  null)
-
---==============================
-
-alter table Состав_заказа
-drop column Стоимость_товара_с_учетом_скидки
-
-alter table Заказы
-drop column Итоговая_сумма
-
-alter table Склад
-alter column Количество_на_складе decimal (10)
-
---===================================
-
-alter table Состав_заказа
-alter column Количество_единиц_товара decimal (10)
